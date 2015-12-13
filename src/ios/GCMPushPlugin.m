@@ -100,7 +100,16 @@
                                                           handler:_registrationHandler];
     } else {
         NSLog(@"Registering with native iOS hooks");
-        NSDictionary *tokenResponse = @{@"ios": token};
+        
+        // NSData can not be converted into json -> to string
+        const char *data = [token bytes];
+        NSMutableString *t = [NSMutableString string];
+        
+        for (NSUInteger i = 0; i < [token length]; i++) {
+            [t appendFormat:@"%02.2hhX", data[i]];
+        }
+
+        NSDictionary *tokenResponse = @{@"ios": t};
 
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:tokenResponse];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.registerCallbackId];
