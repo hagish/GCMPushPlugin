@@ -272,7 +272,8 @@
 }
 
 - (void)unregister:(CDVInvokedUrlCommand*)command {
-    if ([[UIApplication sharedApplication] isRegisteredForRemoteNotifications]) {
+    // for now we just try to unregister if it was registered or not
+    if (true || [[UIApplication sharedApplication] isRegisteredForRemoteNotifications]) {
         [[UIApplication sharedApplication] unregisterForRemoteNotifications];
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully unregistered from iOS notifications"];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.unregisterCallbackId];
