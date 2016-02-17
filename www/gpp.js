@@ -35,16 +35,16 @@ var GcmPushPlugin = {
     },
     subscribeToTopic : function(successCB,errorCB, topic){
         cordova.exec(
-                function(resp){},
-                function(err){},
+                successCB,
+                errorCB,
                 "GCMPushPlugin",
                 "subscribeToTopic",
                 [topic])
     },
     unsubscribeToTopic :function(successCB,errorCB, topic){
         cordova.exec(
-                function(resp){},
-                function(err){},
+                successCB,
+                errorCB,
                 "GCMPushPlugin",
                 "unsubscribeToTopic",
                 [topic]
